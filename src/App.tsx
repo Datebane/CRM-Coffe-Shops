@@ -25,11 +25,7 @@ const App = () => {
       <h2>Unsplash Photos</h2>
       <ol>
         {photos.map(
-          (photo: {
-            id: string;
-            urls: { small: string };
-            alt_description: string;
-          }) => (
+          photo => (
             <li key={photo.id}>
               <img src={photo.urls.small} alt={photo.alt_description} />
             </li>
