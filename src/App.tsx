@@ -19,10 +19,10 @@ const App: React.FC = () => {
           params: {
             client_id: "yx942CVK5iBIR-aYFffB0ks9DNCZ7e5LOV4_qDTJi6A",
             page: page,
-            per_page: 10 // Кількість фото на сторінку
+            per_page: 10, 
           },
         });
-        setPhotos(prevPhotos => [...prevPhotos, ...response.data]);
+        setPhotos((prevPhotos) => [...prevPhotos, ...response.data]);
       } catch (error) {
         console.error("Error fetching photos:", error);
       }
@@ -34,10 +34,10 @@ const App: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 200 // Зміна в умові тут
       ) {
-        setPage(prevPage => prevPage + 1);
+        setPage((prevPage) => prevPage + 1);
       }
     };
 
@@ -51,8 +51,8 @@ const App: React.FC = () => {
     <div>
       <h2>Unsplash Photos</h2>
       <ol>
-        {photos.map((photo: Photo) => (
-          <li key={photo.id}>
+        {photos.map((photo: Photo, index: number) => (
+          <li key={`${photo.id}-${index}`}>
             <img src={photo.urls.small} alt={photo.alt_description} />
           </li>
         ))}
@@ -62,7 +62,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-
-
-
